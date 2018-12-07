@@ -4,7 +4,7 @@ Created on Wed Dec  5 19:17:28 2018
 
 @author: cl
 """
-
+#利用turtle绘制一朵玫瑰花
 #RoseDraw.py
 import turtle as t
 # 定义一个曲线绘制函数
