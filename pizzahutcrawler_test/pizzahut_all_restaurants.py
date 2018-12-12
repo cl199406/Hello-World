@@ -19,7 +19,7 @@ with open(filename,'r',encoding='UTF-8-sig') as f:
 cities=list(set(cities))
 url='http://www.pizzahut.com.cn/'
 result={}
-conn=MongoClient(host='127.0.0.1',port=27017)
+conn=MongoClient(host='127.0.0.1',port=27017)#连接本地MongoDB数据库
 db=conn.mydb.test_set
 for i in range(len(cities)):
     s=requests.Session()
@@ -58,8 +58,9 @@ for i in range(len(cities)):
         page+=1
         time.sleep(2)
     result[cities[i]]=restaurants
-    db.insert_one({cities[i]:restaurants})
-    print('\r下载进度:{0:.2f}%'.format((i+1)*100/385),end='')
+    db.insert_one({cities[i]:restaurants})#将数据写入MongoDB
+    print('\r下载进度:{0:.2f}%'.format((i+1)*100/385),end='')#打印下载进度
+#将得到的数据写入json文件中
 with open('D:/test/city.json','w',encoding='utf-8') as f:
     f.write(json.dumps(result,indent=4,ensure_ascii=False))
 for i in db.find():
